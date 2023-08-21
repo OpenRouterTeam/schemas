@@ -54,9 +54,13 @@ The current RFC draft schema is `v1`. To start your router, create a JSON file w
 }
 ```
 
-You can then extend the schema and submit this JSON as your `route`.
+You can then extend the schema and submit this JSON as your `route`. [Here's an example](/examples/v1-fallback-router.json).
 
-Custom routers will go live after we receive feedback and suggestions. Please feel free to [create an issue](/issues) or open a PR directly on this repository to start the discussion!
+**Note:** You should submit a single model config inside the `models` array unless you also want a `mixture_of_experts`. If the latter is unspecified and `models.length > 1`, you'll receive an error.
+
+### When will this be available?
+
+Custom routers will go live after we receive feedback and suggestions. Please feel free to create an issue or open a PR directly on this repository to start the discussion!
 
 You can also message us in [Discord](https://discord.gg/T7cXxR68vK).
 
