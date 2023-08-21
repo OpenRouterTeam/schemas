@@ -24,7 +24,7 @@ In the request body to the [OpenRouter API](https://openrouter.ai/docs), you can
 }
 ```
 
-This route allows you to use an open source model (whatever OpenRouter thinks might be best for your primary model) as a fallback if :
+This route allows you to use an **open source model** (whatever OpenRouter thinks might be best for your primary model) as a fallback if:
 
 1. Your primary model requires the use of a moderation model to avoid sending certain types of prompts
 2. Our moderation model(s) flagged your prompt or system prompt for a specific reason.
