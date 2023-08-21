@@ -1,0 +1,11 @@
+{
+  "$schema": "../v1.json",
+  "models": [
+    {
+      "identifier": "openai/gpt-4"
+    },
+    {
+      "identifier": "llama2"
+    }
+  ]
+}

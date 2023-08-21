@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openrouter.ai/api/v1/router/schema.json",
+  "title": "OpenRouter Schema v1",
+  "description": "A dynamic router declaration.",
+  "type": "object",
+  "definitions": {
+    "modelIdentifier": {
+      "type": "string",
+      "description": "Model identifier reference",
+      "examples": ["openai/gpt-4"],
+      "#comment": "Update the examples with top 10 models"
+    },
+    "promptWrapper": {
+      "type": "object",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "System prompt text."
+        },
+        "embedding_prefix": {
+          "type": "string",
+          "description": "Prefix to put at the beginning of the embeddings."
+        },
+        "embedding_suffix": {
+          "type": "string",
+          "description": "Suffix to put at the end of the embeddings."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix to put at the beginning of the user's prompt."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "Suffix to put at the end of the user's prompt."
+        }
+      }
+    }
+  },
+
+  "properties": {
+    "models": {
+      "type": "array",
+      "description": "Models to query, if they pass moderation",
+      "items": {
+        "type": "object",
+        "properties": {
+          "identifier": { "$ref": "#/definitions/modelIdentifier" },
+          "prompt_override": { "$ref": "#/definitions/promptWrapper" },
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "top_p": { "type": "number" },
+              "temperature": { "type": "number" },
+              "top_k": { "type": "integer" },
+              "max_tokens": { "type": "integer" }
+            }
+          }
+        },
+        "required": ["identifier"]
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the router"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the router"
+    },
+    "prompt": { "$ref": "#/definitions/promptWrapper" },
+    "mixture_of_experts": {
+      "type": "object",
+      "description": "How to combine results from the above models together",
+      "properties": {
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "identifier": { "$ref": "#/definitions/modelIdentifier" },
+              "weight": { "type": "number" }
+            },
+            "required": ["identifier", "weight"]
+          }
+        },
+        "combination_method": { "type": "string" }
+      },
+      "required": ["models", "combination_method"]
+    },
+    "embeddings": {
+      "type": "array",
+      "description": "Content to embed and include in all queries",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string", "format": "uri" }
+        },
+        "required": ["url"]
+      }
+    },
+    "fallback": {
+      "description": "Route to use if one of the models above refuses the input",
+      "oneOf": [
+        {
+          "type": "string",
+          "$comment": "this should be 'object' but causes recursive issues",
+          "description": "Another instance of this schema.",
+          "$ref": "#"
+        },
+        {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to another JSON conforming to this schema."
+        }
+      ]
+    }
+  },
+  "required": ["models"]
+}
