@@ -19,8 +19,8 @@ In the request body to the [OpenRouter API](https://openrouter.ai/docs), you can
 
 ```json
 {
-  model: "openai/gpt-4",
-  route: "fallback"
+  "model": "openai/gpt-4",
+  "route": "fallback"
 }
 ```
 
@@ -33,8 +33,8 @@ You can also use list of `models` to indicate which models you'd like to try, in
 
 ```json
 {
-  models: ["openai/gpt-4", "meta-llama/llama-2-70b-chat"],
-  route: "fallback"
+  "models": ["openai/gpt-4", "meta-llama/llama-2-70b-chat"],
+  "route": "fallback"
 }
 ```
 
