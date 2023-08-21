@@ -59,3 +59,7 @@ You can then extend the schema and submit this JSON as your `route`.
 Custom routers will go live after we receive feedback and suggestions. Please feel free to [create an issue](/issues) or open a PR directly on this repository to start the discussion!
 
 You can also message us in [Discord](https://discord.gg/T7cXxR68vK).
+
+## Model identifiers
+
+Models must be identified by one of the `/`-separated strings in the [OpenRouter docs](https://openrouter.ai/docs#models), or a model identifier in Hugging Face format.

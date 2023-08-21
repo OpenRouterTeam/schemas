@@ -1,11 +1,15 @@
 {
   "$schema": "../v1.json",
-  "models": [
-    {
-      "identifier": "openai/gpt-4"
-    },
-    {
-      "identifier": "llama2"
-    }
-  ]
+  "models": [{
+    "identifier": "openai/gpt-4",
+    "max_tokens": 300,
+    "temperature": 0.8
+  }],
+  "fallback": {
+    "models":[{
+      "identifier": "meta-llama/llama-2-70b-chat",
+      "max_tokens": 100,
+      "temperature": 0.3
+    }]
+  }
 }

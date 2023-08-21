@@ -41,7 +41,7 @@
   "properties": {
     "models": {
       "type": "array",
-      "description": "Models to query, if they pass moderation",
+      "description": "Model(s) to query, if they pass moderation",
       "items": {
         "type": "object",
         "properties": {
@@ -71,7 +71,7 @@
     "prompt": { "$ref": "#/definitions/promptWrapper" },
     "mixture_of_experts": {
       "type": "object",
-      "description": "How to combine results from the above models together",
+      "description": "How to combine results from the above models together. If unspecified, passing more than one object in 'models' will raise an error.",
       "properties": {
         "models": {
           "type": "array",
@@ -84,7 +84,10 @@
             "required": ["identifier", "weight"]
           }
         },
-        "combination_method": { "type": "string" }
+        "combination_method": {
+          "type": "string",
+          "description": "How to combine the results from the models, e.g. 'weighted_average'"
+        }
       },
       "required": ["models", "combination_method"]
     },
@@ -94,17 +97,21 @@
       "items": {
         "type": "object",
         "properties": {
-          "url": { "type": "string", "format": "uri" }
+          "url": { "type": "string", "format": "uri" },
+          "max_tokens": {
+            "type": "number",
+            "description": "Max tokens from this source to include in prompts"
+          }
         },
-        "required": ["url"]
+        "required": ["url", "max_tokens"]
       }
     },
     "fallback": {
       "description": "Route to use if one of the models above refuses the input",
       "oneOf": [
         {
-          "type": "string",
-          "$comment": "this should be 'object' but causes recursive issues",
+          "type": "object",
+          "$comment": "this may need to be 'string' because it causes recursion issues",
           "description": "Another instance of this schema.",
           "$ref": "#"
         },
