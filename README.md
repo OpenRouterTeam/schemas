@@ -1,4 +1,4 @@
-# OpenRouter - Model Router JSON Schema
+# OpenRouter Schemas
 
 This is the JSON schema used to configure OpenRouter's dynamic model routing. Features:
 
