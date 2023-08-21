@@ -1,0 +1,14 @@
+{
+  "name": "@openrouter/schemas",
+  "version": "0.0.1",
+  "description": "Schema definition for OpenRouter",
+  "files": [
+    "v1.json"
+  ],
+  "author": "L ❤️ ☮ ✋",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenRouterTeam/schemas.git"
+  },
+  "license": "MIT"
+}
